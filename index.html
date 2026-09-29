@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#fff0f5">
+    <meta name="description" content="かわいい仲間とスイーツを作って楽しむPWA">
+
+    <title>SWEET FRIENDS</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon.svg">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ヘッダー -->
+        <header class="header">
+            <div>
+                <p class="small-title">SWEET FRIENDS</p>
+                <h1>🍰 スイーツ工房</h1>
+            </div>
+
+            <div class="header-character">
+                🐰
+            </div>
+        </header>
+
+
+        <!-- メインコンテンツ -->
+        <main id="app-content">
+
+            <!-- ホーム -->
+            <section id="home" class="page active">
+
+                <div class="welcome-card">
+                    <div class="character">🐰</div>
+
+                    <div>
+                        <p class="hello">こんにちは！</p>
+                        <h2>今日は何を作る？</h2>
+                        <p>
+                            好きなスイーツを選んで<br>
+                            いっしょに作ってみよう！
+                        </p>
+                    </div>
+                </div>
+
+
+                <h2 class="section-title">🍓 今日のおすすめ</h2>
+
+                <div class="sweet-grid">
+
+                    <button class="sweet-card" onclick="makeSweet('いちごパフェ', '🍓')">
+                        <div class="sweet-icon">🍓</div>
+                        <h3>いちごパフェ</h3>
+                        <p>甘くてかわいい定番スイーツ</p>
+                    </button>
+
+                    <button class="sweet-card" onclick="makeSweet('プリン', '🍮')">
+                        <div class="sweet-icon">🍮</div>
+                        <h3>なめらかプリン</h3>
+                        <p>とろ〜り甘い人気者</p>
+                    </button>
+
+                    <button class="sweet-card" onclick="makeSweet('パンケーキ', '🥞')">
+                        <div class="sweet-icon">🥞</div>
+                        <h3>ふわふわパンケーキ</h3>
+                        <p>ふわふわ食感を楽しもう</p>
+                    </button>
+
+                    <button class="sweet-card" onclick="makeSweet('カップケーキ', '🧁')">
+                        <div class="sweet-icon">🧁</div>
+                        <h3>カップケーキ</h3>
+                        <p>見た目もかわいいスイーツ</p>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- スイーツ -->
+            <section id="sweets" class="page">
+
+                <div class="page-title">
+                    <span>🍰</span>
+                    <div>
+                        <h2>スイーツを作る</h2>
+                        <p>好きなスイーツを選んでね</p>
+                    </div>
+                </div>
+
+                <div class="sweet-list">
+
+                    <button onclick="makeSweet('いちごパフェ', '🍓')" class="list-item">
+                        <span>🍓</span>
+                        <div>
+                            <strong>いちごパフェ</strong>
+                            <small>いちごたっぷり！</small>
+                        </div>
+                    </button>
+
+                    <button onclick="makeSweet('プリン', '🍮')" class="list-item">
+                        <span>🍮</span>
+                        <div>
+                            <strong>プリン</strong>
+                            <small>なめらかとろとろ</small>
+                        </div>
+                    </button>
+
+                    <button onclick="makeSweet('パンケーキ', '🥞')" class="list-item">
+                        <span>🥞</span>
+                        <div>
+                            <strong>パンケーキ</strong>
+                            <small>ふわふわに焼こう！</small>
+                        </div>
+                    </button>
+
+                    <button onclick="makeSweet('カップケーキ', '🧁')" class="list-item">
+                        <span>🧁</span>
+                        <div>
+                            <strong>カップケーキ</strong>
+                            <small>かわいくデコレーション</small>
+                        </div>
+                    </button>
+
+                    <button onclick="makeSweet('ドーナツ', '🍩')" class="list-item">
+                        <span>🍩</span>
+                        <div>
+                            <strong>ドーナツ</strong>
+                            <small>もちもち甘いドーナツ</small>
+                        </div>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- お気に入り -->
+            <section id="favorites" class="page">
+
+                <div class="page-title">
+                    <span>⭐</span>
+                    <div>
+                        <h2>お気に入りのお店</h2>
+                        <p>好きなお店を登録しよう</p>
+                    </div>
+                </div>
+
+
+                <div class="favorite-form">
+
+                    <label for="shopName">
+                        🍰 お店の名前
+                    </label>
+
+                    <input
+                        id="shopName"
+                        type="text"
+                        placeholder="例：Sweet Cafe"
+                    >
+
+                    <label for="shopMemo">
+                        💭 メモ
+                    </label>
+
+                    <input
+                        id="shopMemo"
+                        type="text"
+                        placeholder="例：いちごパフェがおすすめ"
+                    >
+
+                    <button onclick="addShop()" class="add-button">
+                        ＋ お店を登録
+                    </button>
+
+                </div>
+
+
+                <h3 class="favorite-title">登録したお店</h3>
+
+                <div id="shopList"></div>
+
+            </section>
+
+        </main>
+
+
+        <!-- スイーツ完成モーダル -->
+        <div id="sweetModal" class="modal">
+
+            <div class="modal-content">
+
+                <button class="close-button" onclick="closeModal()">×</button>
+
+                <div id="cookingCharacter" class="cooking-character">
+                    🐰
+                </div>
+
+                <p id="cookingText">スイーツを作っています...</p>
+
+                <div id="sweetResult" class="sweet-result">
+                    🍰
+                </div>
+
+                <h2 id="resultTitle">完成！</h2>
+
+                <p id="resultMessage">
+                    おいしいスイーツができたよ！
+                </p>
+
+                <button onclick="closeModal()" class="done-button">
+                    いただきます！
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 下部ナビゲーション -->
+        <nav class="bottom-nav">
+
+            <button
+                class="nav-button active"
+                data-page="home"
+                onclick="showPage('home')"
+            >
+                <span>🏠</span>
+                <small>ホーム</small>
+            </button>
+
+            <button
+                class="nav-button"
+                data-page="sweets"
+                onclick="showPage('sweets')"
+            >
+                <span>🍰</span>
+                <small>スイーツ</small>
+            </button>
+
+            <button
+                class="nav-button"
+                data-page="favorites"
+                onclick="showPage('favorites')"
+            >
+                <span>⭐</span>
+                <small>お気に入り</small>
+            </button>
+
+        </nav>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
